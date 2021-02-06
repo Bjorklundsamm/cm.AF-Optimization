@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const taxCodes = [['36074', 'ADELANTO'],
+const taxCodes = [['36074', 'ADELANTO'],
   ['19089', 'AGOURA HILLS'],
   ['01010', 'ALAMEDA'],
   ['01998', 'ALAMEDA COUNTY'],
@@ -538,3 +538,5 @@ export const taxCodes = [['36074', 'ADELANTO'],
   ['58998', 'YUBA COUNTY'],
   ['36076', 'YUCAIPA'],
   ['36077', 'YUCCA VALLEY']];
+
+module.exports = taxCodes;

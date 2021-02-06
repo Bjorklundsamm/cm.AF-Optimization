@@ -296,8 +296,9 @@ npm i
 
 ```json
 {
-  username: String,
-  email: String,
+  id: INT
+  name: String
+  email: String
   ip: String
 }
 ```
@@ -316,8 +317,9 @@ npm i
 ```json
 {
   id: INT
-  email: String,
-  password: String,
+  name: String
+  email: String
+  password: String
   ip: String
 }
 ```
@@ -333,8 +335,9 @@ npm i
 ```json
 {
   id: INT
-  email: String,
-  password: String,
+  name: String
+  email: String
+  password: String
   ip: String
 }
 ```
