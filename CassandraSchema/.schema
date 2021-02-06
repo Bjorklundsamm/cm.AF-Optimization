@@ -1,0 +1,42 @@
+CREATE KEYSPACE home WITH replication =
+  {‘class’: ‘SimpleStrategy’, ‘replication_factor’ : 1};
+
+CREATE TYPE trulia.address (
+  street text,
+  city text,
+  state_or_province text,
+  postal_code text,
+  country text );
+
+CREATE TABLE trulia.homes (
+  group_id text,
+  home_id text,
+  user text,
+  cost int,
+  tax_id int,
+  loan_type text,
+  seller int,
+  address frozen<address>,
+  cd data,
+  PRIMARY KEY ( group_id ) )
+  AND CLUSTERING ORDER BY ((group_id ASC), home_id ASC) ;
+
+CREATE TABLE trulia.home_data (
+  home_id text,
+  seller text,
+  tax_id text,
+  loan_type text,
+  address frozen<address> );
+  AND CLUSTERING ORDER BY (home_id ASC) ;
+
+CREATE TABLE trulia.tax_rates (
+  tax_id text PRIMARY KEY,
+  county text,
+  rate int );
+  AND CLUSTERING ORDER BY (county);
+
+CREATE TABLE trulia.loan_types (
+  loan_type text PRIMARY KEY,
+  interest_rate int,
+  description text );
+  AND CLUSTERING ORDER BY (loan_type);
