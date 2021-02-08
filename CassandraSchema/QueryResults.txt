@@ -1,0 +1,37 @@
+home_data TABLE:
+cqlsh:affordability_calculator> SELECT * FROM home_data WHERE tax_id=21026 LIMIT 10;
+
+ home_id     | city           | cost    | county          | createdat                                                 | mortgage_id  | seller_id | street_address         | tax_id | zip_code
+-------------+----------------+---------+-----------------+-----------------------------------------------------------+--------------+-----------+------------------------+--------+------------
+ 60013_63252 | East Margarete | 6942192 |         OAKDALE | Thu Aug 01 2019 04:54:16 GMT-0700 (Pacific Daylight Time) | 15_yr_fx_fha |   176_334 |        938 Noe Station |  21026 | 54179-0067
+ 60011_39426 |    Pfefferport | 7648055 |           DIXON | Wed Aug 21 2019 05:29:42 GMT-0700 (Pacific Daylight Time) | 15_yr_fx_fha |   675_525 | 40151 McLaughlin Ports |  21026 |      40367
+ 60016_93750 |   North Alison | 8376732 |            NAPA | Tue Nov 03 2020 00:37:23 GMT-0800 (Pacific Standard Time) | 15_yr_fx_fha |   861_415 |         859 Hauck Path |  21026 |      35332
+ 60008_16558 |    Laviniaview | 8375898 |          PINOLE | Fri Apr 17 2020 09:56:03 GMT-0700 (Pacific Daylight Time) | 30_yr_fx_fha |   535_431 |    7249 Brycen Streets |  21026 | 69739-4729
+ 60016_12216 |       Leraview | 6442840 |  EAST PALO ALTO | Mon Jun 15 2020 14:06:14 GMT-0700 (Pacific Daylight Time) |  30_yr_fx_va |   283_249 |      458 Pouros Stream |  21026 |      55794
+ 60015_32568 |    Robertsview | 9932835 | MARIPOSA COUNTY | Sat Mar 28 2020 23:16:54 GMT-0700 (Pacific Daylight Time) |  15_yr_fx_va |   454_940 |       679 Jakob Tunnel |  21026 |      98591
+ 60017_85072 |    Hirtheville | 1411103 |          AUBURN | Wed Apr 03 2019 19:30:06 GMT-0700 (Pacific Daylight Time) |     10_yr_fx |   189_877 |  8017 Christian Plains |  21026 |      27685
+ 60006_17647 |   Port Gladyce | 2499943 |     PISMO BEACH | Wed Jun 05 2019 02:44:01 GMT-0700 (Pacific Daylight Time) | 15_yr_fx_fha |   198_515 |      78118 Heaney Dale |  21026 | 48654-5746
+ 60001_27448 |     Grimesland | 7849458 |        LIVE OAK | Sun Sep 27 2020 05:29:06 GMT-0700 (Pacific Daylight Time) |  30_yr_fx_va |   278_258 |        3063 Terry Walk |  21026 |      92174
+ 60015_64530 |   South Melody | 8349830 |     YOLO COUNTY | Sun Jun 23 2019 13:33:49 GMT-0700 (Pacific Daylight Time) |     15_yr_fx |   110_746 |       750 Garett Plain |  21026 | 67948-9804
+
+(10 rows)
+
+
+listing TABLE:
+
+cqlsh:affordability_calculator> SELECT * FROM listings WHERE county='SEBASTOPOL' LIMIT 10;
+
+ group_id | home_id     | city              | cost     | county     | createdat                                                 | street_address      | zip_code
+----------+-------------+-------------------+----------+------------+-----------------------------------------------------------+---------------------+------------
+    60014 | 60014_11533 |         Feilmouth |  3521341 | SEBASTOPOL | Fri Oct 18 2019 19:25:02 GMT-0700 (Pacific Daylight Time) |       2376 Howe Via |      18344
+    60014 | 60014_12858 |         Pansystad |  4449897 | SEBASTOPOL | Sat Dec 26 2020 10:00:42 GMT-0800 (Pacific Standard Time) |  517 Roosevelt Oval | 48489-5833
+    60014 | 60014_12905 |     Gleichnerfort |  3224281 | SEBASTOPOL | Wed Sep 23 2020 06:00:57 GMT-0700 (Pacific Daylight Time) |     8137 Jana Vista | 02747-4668
+    60014 | 60014_14872 |        Brycenbury |  5061119 | SEBASTOPOL | Mon Jun 24 2019 17:13:32 GMT-0700 (Pacific Daylight Time) |   0493 Ruthie Walks |      15743
+    60014 | 60014_15349 |      Fredrickbury |  4183549 | SEBASTOPOL | Tue Dec 03 2019 10:24:41 GMT-0800 (Pacific Standard Time) | 68570 Sanford Trace |      91461
+    60014 | 60014_15449 |   North Gudrunton | 10339772 | SEBASTOPOL | Thu Oct 08 2020 09:14:31 GMT-0700 (Pacific Daylight Time) | 8409 Tianna Mission | 13060-4603
+    60014 | 60014_15483 | West Tatumborough |  3757917 | SEBASTOPOL | Thu Jan 31 2019 01:24:21 GMT-0800 (Pacific Standard Time) |      901 Marks Rest |      44717
+    60014 | 60014_15678 |        South Keon |  9555093 | SEBASTOPOL | Fri Jan 04 2019 15:06:37 GMT-0800 (Pacific Standard Time) |     26114 Kole Spur |      77946
+    60014 | 60014_17850 |        Morarmouth |  5805194 | SEBASTOPOL | Thu Jul 23 2020 00:01:52 GMT-0700 (Pacific Daylight Time) | 75685 Pollich Fords |      46695
+    60014 | 60014_18063 |        Adolfofort |  9895017 | SEBASTOPOL | Thu Feb 06 2020 02:38:54 GMT-0800 (Pacific Standard Time) | 921 Wilderman Creek |      00493
+
+(10 rows)
