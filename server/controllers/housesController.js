@@ -1,4 +1,4 @@
-const Houses = require('../models/housesModel.js');
+const Houses = require('../../database/models/listings');
 
 const getAll = (req, res) => {
   Houses.getAll((err, houses) => {
@@ -6,16 +6,6 @@ const getAll = (req, res) => {
       res.status(400).send(err);
     } else {
       res.status(200).send(houses);
-    }
-  });
-};
-
-const getRandom = (req, res) => {
-  Houses.getRandom((err, house) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      res.status(200).send(house);
     }
   });
 };
@@ -32,6 +22,5 @@ const getById = (req, res) => {
 
 module.exports = {
   getAll,
-  getRandom,
   getById,
 };

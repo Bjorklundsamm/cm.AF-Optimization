@@ -1,9 +1,0 @@
-type,years,interest_rate
-30-year fixed,30,0.0338
-20-year fixed,20,0.0347
-15-year fixed,15,0.0304
-10-year fixed,10,0.0337
-FHA 30-year fixed,30,0.0000
-FHA 15-year fixed,15,0.0000
-VA 30-year fixed,30,0.0290
-VA 15-year fixed,15,0.0000

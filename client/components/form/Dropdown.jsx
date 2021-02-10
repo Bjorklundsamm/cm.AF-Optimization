@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Money from '../../../lib/moneyHelper';
-
-const Dropdown = ({ id, loans, handleInputChange }) => (
+const Dropdown = ({ id, mortgages, handleInputChange }) => (
   <select
     id={id}
     onChange={
@@ -13,12 +11,12 @@ const Dropdown = ({ id, loans, handleInputChange }) => (
     }
   >
     {
-      loans.map((loan) => (
+      mortgages.map((mortgage) => (
         <option
-          key={loan._id}
-          value={loan.type}
+          key={mortgage._id}
+          value={mortgage.terms}
         >
-          {loan.type}
+          {mortgage.terms}
         </option>
       ))
     }
@@ -29,6 +27,6 @@ export default Dropdown;
 
 Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
-  loans: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  mortgages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   handleInputChange: PropTypes.func.isRequired,
 };

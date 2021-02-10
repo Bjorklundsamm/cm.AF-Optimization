@@ -1,38 +1,9 @@
-const mongoose = require('mongoose');
+const { Client } = require('cassandra-driver');
 
-const url = process.env.PRODUCTION_DB || 'mongodb://localhost/calculator';
-
-mongoose.connect(
-  url,
-  (err) => (err ? console.log('====== ====== ====== ======\nUh-oh! looks like you have a Mongoose connection error:\n', err, '\n====== ====== ====== ======') : console.log('Successfully connected to Mongoose!')),
-  { useNewUrlParser: true, useUnifiedTopology: true },
-);
-
-const db = mongoose.connection;
-
-const housesSchema = new mongoose.Schema({
-  price: Number,
-  zipcode: String,
-  state: String,
+const dbConnect = new Client({
+  contactPoints: ['127.0.0.1:9042'],
+  localDataCenter: 'datacenter1',
+  keyspace: 'affordability_calculator',
 });
-const House = mongoose.model('House', housesSchema);
 
-const taxesSchema = new mongoose.Schema({
-  state: String,
-  effective_tax_rate: Number,
-});
-const Tax = mongoose.model('Tax', taxesSchema);
-
-const loansSchema = new mongoose.Schema({
-  type: String,
-  years: Number,
-  interest_rate: Number,
-});
-const Loan = mongoose.model('Loan', loansSchema);
-
-module.exports = {
-  connection: db,
-  House,
-  Tax,
-  Loan,
-};
+module.exports = dbConnect;

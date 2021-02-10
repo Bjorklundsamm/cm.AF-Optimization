@@ -8,7 +8,7 @@ import Range from './form/Range';
 import Dropdown from './form/Dropdown';
 
 const Form = ({
-  homePrice, downPayment, downPaymentPercent, interestRate, loans, handleInputChange,
+  homePrice, downPayment, downPaymentPercent, interestRate, mortgages, handleInputChange,
 }) => (
   <FormStyles>
     <div className="form-container">
@@ -98,7 +98,7 @@ const Form = ({
           <Dropdown
             id="input-control-interest-rate-dropdown-select"
             name="selectedLoanType"
-            loans={loans}
+            mortgages={mortgages}
             handleInputChange={handleInputChange}
           />
         </div>
@@ -114,6 +114,6 @@ Form.propTypes = {
   downPayment: PropTypes.number.isRequired,
   downPaymentPercent: PropTypes.number.isRequired,
   interestRate: PropTypes.number.isRequired,
-  loans: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  mortgages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   handleInputChange: PropTypes.func.isRequired,
 };

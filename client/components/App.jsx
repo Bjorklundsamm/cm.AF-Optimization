@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 
 import dbOps from '../../lib/databaseOperations';
@@ -27,7 +28,7 @@ class App extends React.Component {
       propertyTaxes: 0,
       homeInsurance: 75,
       mortgageInsuranceAndOther: 0,
-      loans: [],
+      mortgages: [],
       donutData: donutStarterData,
     };
 
@@ -41,9 +42,9 @@ class App extends React.Component {
   async handleInputChange({ name, value }) {
     if (!name) {
       await dbOps.getInterestRateByLoanType(value)
-        .then((loan) => this.setState({
-          interestRate: loan.interest_rate * 100,
-          numberOfYears: loan.years,
+        .then((mortgage) => this.setState({
+          interestRate: mortgage.interest_rate * 100,
+          numberOfYears: mortgage.years,
         }))
         .catch((err) => {
           console.log(err);
@@ -142,23 +143,23 @@ class App extends React.Component {
     const { downPaymentPercent } = this.state;
     await dbOps.getRandomHome()
       .then((home) => {
-        dbOps.getTaxByState(home.state)
+        dbOps.getTaxById(home.tax_id)
           .then((tax) => {
             this.setState({
-              homePrice: Number(home.price),
-              downPayment: mortgageOps.calculatePercentage(home.price, downPaymentPercent),
-              taxRate: tax.effective_tax_rate,
-              propertyTaxes: mortgageOps.calculateTaxes(home.price, tax.effective_tax_rate),
+              homePrice: Number(home.cost),
+              downPayment: mortgageOps.calculatePercentage(home.cost, downPaymentPercent),
+              taxRate: tax.rate,
+              propertyTaxes: mortgageOps.calculateTaxes(home.cost, tax.rate),
             });
           });
       });
 
-    await dbOps.getLoanTypes()
-      .then((loans) => {
-        this.setState({ loans });
+    await dbOps.getMortgageTypes()
+      .then((mortgages) => {
+        this.setState({ mortgages });
         this.setState({
-          interestRate: loans[0].interest_rate * 100,
-          numberOfYears: loans[0].years,
+          interestRate: mortgages[0].interest_rate * 100,
+          numberOfYears: mortgages[0].years,
         });
       });
 
@@ -237,7 +238,7 @@ class App extends React.Component {
       downPayment,
       downPaymentPercent,
       interestRate,
-      loans,
+      mortgages,
       estimatedPayment,
       principleAndInterest,
       propertyTaxes,
@@ -259,7 +260,7 @@ class App extends React.Component {
                 downPayment={Number(downPayment)}
                 downPaymentPercent={Number(downPaymentPercent)}
                 interestRate={Number(interestRate)}
-                loans={loans}
+                mortgages={mortgages}
                 handleInputChange={this.handleInputChange}
               />
               <Results
