@@ -1,22 +1,20 @@
-<img width="512" alt="Curve-Metrics" src="https://user-images.githubusercontent.com/68446801/110538550-01b79880-80d9-11eb-9879-b9091d4b8989.png">
+<img width="1024" alt="Curve-Metrics" src="https://user-images.githubusercontent.com/68446801/110538550-01b79880-80d9-11eb-9879-b9091d4b8989.png">
 
 # CurveMetrics - Affordability Calculator Optimization
 
 # Description
-Legacy code base inherited from Cousco.us; repo contains a rehearsal re-factoring with Cassandra particularly with the affordability calculator. Project demands specified to focus primarily on scalability and loadtimes. 
+Legacy code base inherited from Cousco.us; repo contains a rehearsal re-factoring with Cassandra particularly with the affordability calculator. Project demands specified to focus primarily on scalability and loadtimes.
 Goals following initial walkthrough of product:
 - [x] Reduce DB Size demands
 - [x] Cut response times
 - [x] Refined calculator algorithms to reduce error rate
 - [x] Implement use of CQL, phase out MySQL
 
-> Deadline:
-```html
-<strike>02/18/2020</strike>
-```
+<strike>Deadline: 02/18/2020</strike>
+
 
 ## Table of Contents
-1. [Related](#Related Projects)
+1. [Related](#Related)
 1. [Requirements](#Requirements)
 1. [Usage](#Usage)
 1. [Development](#Development)
@@ -24,7 +22,7 @@ Goals following initial walkthrough of product:
 1. [Results](#Results)
 1. [API](#API)
 
-## Related Projects
+## Related
 
   - https://github.com/Curve-Metrics/Carousel-Service-Optimization.git
   - https://github.com/Curve-Metrics/Photos-Optimization.git
@@ -56,7 +54,7 @@ npm run start
 ```sh
 node old-max-space-size=8192 seed.js
 ```
--- BE AWARE THE CURRENT SEED IS SET TO GENERATE 50,000,000 INSTANCES OF DATA AND MAKE TAKE UPWARDS OF 30 MINUTES
+> BE AWARE THE CURRENT SEED IS SET TO GENERATE 50,000,000 INSTANCES OF DATA AND MAKE TAKE UPWARDS OF 30 MINUTES
 
 </br>
 
@@ -74,11 +72,13 @@ node old-max-space-size=8192 seed.js
 </br>
 
 ## Results
-Initial Stastics and response times:
+Initial Stastics and response times: | .
 ----- | ------
-- Page load - 3.95s   | ![image](https://user-images.githubusercontent.com/68446801/110538655-1e53d080-80d9-11eb-983d-833d48cfe3f9.png)
-- Response Times(avg) - 517ms
-- Cluster Size - 11.94gb
+ Page load - 3.95s </br> Response Times(avg) - 517ms  </br> Cluster Size - 11.94gb | ![image](https://user-images.githubusercontent.com/68446801/110538655-1e53d080-80d9-11eb-983d-833d48cfe3f9.png)
+
+Optimized Stastics and response times: | .
+----- | ------
+ **Page load - 2.71s** </br> **Response Times(avg) - 107ms**  </br> **Cluster Size - 210.34mb** | ![image2](./Examples/results.png)
 
 </br>
 
