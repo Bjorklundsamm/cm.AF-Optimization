@@ -1,6 +1,28 @@
-# Perfect Query - SDC Component Optimization
+<img width="512" alt="Curve-Metrics" src="https://user-images.githubusercontent.com/68446801/110538550-01b79880-80d9-11eb-9879-b9091d4b8989.png">
 
-> `CurveMetrics Affordability Calulator`
+# CurveMetrics - Affordability Calculator Optimization
+
+# Description
+Legacy code base inherited from Cousco.us; repo contains a rehearsal re-factoring with Cassandra particularly with the affordability calculator. Project demands specified to focus primarily on scalability and loadtimes. 
+Goals following initial walkthrough of product:
+- [x] Reduce DB Size demands
+- [x] Cut response times
+- [x] Refined calculator algorithms to reduce error rate
+- [x] Implement use of CQL, phase out MySQL
+
+> Deadline:
+```html
+<strike>02/18/2020</strike>
+```
+
+## Table of Contents
+1. [Related](#Related Projects)
+1. [Requirements](#Requirements)
+1. [Usage](#Usage)
+1. [Development](#Development)
+1. [Demo](#Demo)
+1. [Results](#Results)
+1. [API](#API)
 
 ## Related Projects
 
@@ -11,35 +33,62 @@
 
 - [Cassandra](https://cassandra.apache.org/download/)
 
-- Node 6.13.0
+- Node 6.13.0+
 
-## Development
+- .CSV Management Application
+
+## Usage
 
 ### Installing Dependencies
-
-From within the root directory:
+- From within the root directory:
 ```sh
 npm i -g webpack
 npm i
 ```
-
-## Usage
--Start server * client using npm run dev:start npm run start
-
-- **update this with seeding script to generate mock data in a CSV file
+### Starting the server
+- Start server * client using the follow commands:
+```sh
+npm run dev:start
+npm run start
+```
+### Seeding the database
+- If necessary, seed database using:
+```sh
+node old-max-space-size=8192 seed.js
+```
+-- BE AWARE THE CURRENT SEED IS SET TO GENERATE 50,000,000 INSTANCES OF DATA AND MAKE TAKE UPWARDS OF 30 MINUTES
 
 </br>
 
-## Listing API
+## Development
+- Dependencies
+> Axios, Cassandra-driver, CORs, CSV-Parser, Currency-formatter, DotENV, Faker, React/-DOM, Styled-Components
+- Dev-Dependencies
+> Babel, Enzyme, ESLint, FakerJS, Jest, LoaderIO, NewRelic, Webpack, ElastiCache-Driver
 
 </br>
 
-### Select listing matching listingId
+## Demo
+![calculator](https://user-images.githubusercontent.com/68446801/110536212-0af33600-80d6-11eb-8db0-23ddc1cc44b0.gif)
+
+</br>
+
+## Results
+Initial Stastics and response times:
+----- | ------
+- Page load - 3.95s   | ![image](https://user-images.githubusercontent.com/68446801/110538655-1e53d080-80d9-11eb-983d-833d48cfe3f9.png)
+- Response Times(avg) - 517ms
+- Cluster Size - 11.94gb
+
+</br>
+
+## API
+
+### Select all listings
 
 -GET `/api/listings/`
 
 **Success Status Code:** `200`
-
 
 **Returns:** Expects JSON with the following keys.
 
@@ -53,6 +102,9 @@ npm i
     }
 
 ```
+
+### Select listings matching listing:id
+
 -GET `/api/listings/:id`
 
 **Success Status Code:** `200`
@@ -73,6 +125,8 @@ npm i
 
 ```
 
+### Insert new listing
+
 -POST `/api/listings`
 
 **Path Parameters:**
@@ -88,11 +142,10 @@ npm i
 }
   ```
 
-### Path responses:
+**Path responses:**
 **Success Status Code:** `201`
 
-
-### Response format:
+**Response format:**
 * Returns: JSON
 
 ```json
@@ -106,6 +159,8 @@ npm i
       "message": "Failed to add a listing."
     }
 ```
+
+### Update existing listing
 
 -PATCH `/api/listing/:id`
 
@@ -122,11 +177,11 @@ npm i
   }
   ```
 
-### Path responses:
+**Path responses:**
 **Success Status Code:** `201`
 
 
-### Response format:
+**Response format:**
 * Returns: JSON
 
 ```json
@@ -140,11 +195,13 @@ npm i
       "message": "Failed to update a listing."
     }
 ```
-</br>
+
+### Remove listing matching listing:id
 
 -DELETE `/api/listing/:id`
 
-###Path parameters:
+**Path parameters:**
+- `id` - Listing id
 
 **Request Body**
 *
@@ -171,6 +228,8 @@ npm i
     }
 ```
 ## Mortgages API
+
+### Get all local tax rates
 -GET `/api/taxRates/`
 
 **Path Parameters:**
@@ -188,7 +247,7 @@ npm i
   rate: INT%
 }
 ```
-
+### Get specified tax rate
 -GET `/api/mortgages/:id`
 
 **Path Parameters:**
@@ -212,80 +271,9 @@ npm i
 
 </br>
 
--PUT `/api/mortgages/:id`
-
-**Path Parameters:**
-- `id` - mortgages id
-
-**Request Body**
-*
-```json
-{
-  mortgage_ID: STRING
-  terms: STRING
-  fees: INT
-  rate: INT
-  apr: INT
-}
-  ```
-
-### Path responses:
-**Success Status Code:** `201`
-
-
-### Response format:
-* Returns: JSON
-
-```json
-    {
-      "message": "Successfully updated a mortgage."
-    }
-```
-
-```json
-    {
-      "message": "Failed to update a mortgage."
-    }
-```
-</br>
-
--DELETE `/api/mortgage/:id`
-
-###Path parameters:
-
-**Request Body**
-*
-
-   ```id``` mortgage id
-
-
-### Path responses:
-**Success Status Code:** `204`
-
-
-### Response format:
-* Returns: JSON
-
-```json
-    {
-      "message": "Successfully deleted a mortgage."
-    }
-```
-
-```json
-    {
-      "message": "Failed to deleted a mortgage."
-    }
-```
-
-</br>
-
-</br>
-
 ## __USER API__
- </br>
 
-## Add a user
+### Add a user
 
 - POST `/api/sellers`
 
@@ -302,7 +290,8 @@ npm i
   ip: String
 }
 ```
-</br>
+
+### Get information regarding a specific User
 
 -GET `/api/sellers/:id`
 
@@ -323,7 +312,8 @@ npm i
   ip: String
 }
 ```
-</br>
+
+### Update User Info by matching id
 
 -PATCH `/api/sellers/:userId`
 
@@ -361,7 +351,7 @@ npm i
     }
 ```
 
-</br>
+### Remove a user
 
 -DELETE `/api/user/:id`
 
